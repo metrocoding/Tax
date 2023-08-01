@@ -1,0 +1,15 @@
+/Users/armin/Desktop/App/Tax/bin/Debug/net7.0/Tax
+/Users/armin/Desktop/App/Tax/bin/Debug/net7.0/Tax.deps.json
+/Users/armin/Desktop/App/Tax/bin/Debug/net7.0/Tax.runtimeconfig.json
+/Users/armin/Desktop/App/Tax/bin/Debug/net7.0/Tax.dll
+/Users/armin/Desktop/App/Tax/bin/Debug/net7.0/Tax.pdb
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/Tax.csproj.AssemblyReference.cache
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/Tax.GeneratedMSBuildEditorConfig.editorconfig
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/Tax.AssemblyInfoInputs.cache
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/Tax.AssemblyInfo.cs
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/Tax.csproj.CoreCompileInputs.cache
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/Tax.dll
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/refint/Tax.dll
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/Tax.pdb
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/Tax.genruntimeconfig.cache
+/Users/armin/Desktop/App/Tax/obj/Debug/net7.0/ref/Tax.dll
