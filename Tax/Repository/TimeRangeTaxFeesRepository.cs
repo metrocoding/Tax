@@ -1,10 +1,10 @@
 using Tax.Models;
 
-namespace Tax.DB
+namespace Tax.Repository
 {
-    public static class TimeRangeTaxFees
+    public class TimeRangeTaxFeesRepository : IRepository<TimeRangeTaxFee>
     {
-        public static IEnumerable<TimeRangeTaxFee> GetTimeBasedTaxFees() => new List<TimeRangeTaxFee>
+        public IList<TimeRangeTaxFee> GetAll() => new List<TimeRangeTaxFee>
         {
             new(8, new TimeSpan(6, 0, 0), new TimeSpan(6, 29, 0)),
             new(13, new TimeSpan(6, 30, 0), new TimeSpan(6, 59, 0)),

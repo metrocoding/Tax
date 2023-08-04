@@ -1,8 +1,8 @@
-namespace Tax.DB
+namespace Tax.Repository
 {
-    public static class TollFreeVehicles
+    public class TollFreeVehiclesRepository : IRepository<string>
     {
-        public static string[] GetList() => new[]
+        public IList<string> GetAll() => new List<string>
         {
             "Motorcycle",
             "Tractor",
