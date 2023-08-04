@@ -1,4 +1,3 @@
-using Tax.DB;
 using Tax.Interfaces;
 
 namespace Tax.Models
@@ -12,7 +11,7 @@ namespace Tax.Models
 
         public string Category { get; set; }
 
-        public bool IsTollFree() =>
-            TollFreeVehicles.GetList().Any(v => string.Equals(v, Category, StringComparison.CurrentCultureIgnoreCase));
+        public bool IsTollFree(IEnumerable<string> tollFreeVehicles) =>
+            tollFreeVehicles.Any(v => string.Equals(v, Category, StringComparison.CurrentCultureIgnoreCase));
     }
 }

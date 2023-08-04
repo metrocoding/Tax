@@ -9,14 +9,15 @@ namespace Tax.Models
         }
 
         private int TaxFreeDaysBeforeHoliday { get; }
-        
+
         private DateTime HolidayDate { get; }
         private DateTime StartDate => HolidayDate.AddDays(-TaxFreeDaysBeforeHoliday);
 
         // determines date is on holiday or previous day
         public bool IsVehiclePassedOnTheseDays(DateTime vehiclePassDate)
         {
-            return vehiclePassDate >= StartDate && vehiclePassDate <= HolidayDate;
+            return vehiclePassDate.DayOfYear >= StartDate.DayOfYear &&
+                   vehiclePassDate.DayOfYear <= HolidayDate.DayOfYear;
         }
     }
 }
