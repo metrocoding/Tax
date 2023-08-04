@@ -1,20 +1,30 @@
-using Tax.DB;
 using Tax.Interfaces;
+using Tax.Models;
+using Tax.Repository;
 
-namespace Tax
+namespace Tax.BusinessLogic
 {
-    public class CongestionTaxCalculator
+    public class CongestionTaxCalculatorBusinessLogic : ICongestionTaxCalculatorBusinessLogic
     {
-        /**
-         * Calculate the total toll fee for one day
-         *
-         * @param vehicle - the vehicle
-         * @param dates   - date and time of all passes on one day
-         * @return - the total congestion tax for that days
-         */
-        public static int GetTax(IVehicle vehicle, IEnumerable<DateTime> dates)
+        private readonly IRepository<TimeRangeTaxFee> _timeRangeTaxFeeRepository;
+        private readonly IRepository<string> _tollFreeVehiclesRepository;
+        private readonly IRepository<Holiday> _holidayRepository;
+
+        public CongestionTaxCalculatorBusinessLogic(
+            IRepository<Holiday> holidayRepository,
+            IRepository<TimeRangeTaxFee> timeRangeTaxFeeRepository,
+            IRepository<string> tollFreeVehiclesRepository)
         {
-            if (vehicle.IsTollFree()) return 0;
+            _holidayRepository = holidayRepository;
+            _timeRangeTaxFeeRepository = timeRangeTaxFeeRepository;
+            _tollFreeVehiclesRepository = tollFreeVehiclesRepository;
+        }
+
+
+        // little bit faster and more memory efficient than original method based on BenchmarkDotnet
+        public int GetTax(IVehicle vehicle, IEnumerable<DateTime> dates)
+        {
+            if (vehicle.IsTollFree(_tollFreeVehiclesRepository.GetAll())) return 0;
             var overallFee = 0;
 
             // group by day
@@ -47,11 +57,11 @@ namespace Tax
             return overallFee;
         }
 
-        private static int GetTollFee(DateTime date)
+        public int GetTollFee(DateTime date)
         {
             if (IsTollFreeDate(date)) return 0;
 
-            var timeRangeTaxFee = TimeRangeTaxFees.GetTimeBasedTaxFees().SingleOrDefault(t =>
+            var timeRangeTaxFee = _timeRangeTaxFeeRepository.GetAll().SingleOrDefault(t =>
                 (t.StartTime <= date.TimeOfDay && t.EndTime >= date.TimeOfDay) || (t.StartTime > t.EndTime &&
                     (t.StartTime <= date.TimeOfDay || t.EndTime >= date.TimeOfDay)));
 
@@ -60,10 +70,10 @@ namespace Tax
             return timeRangeTaxFee.Fee;
         }
 
-        private static bool IsTollFreeDate(DateTime date)
+        public bool IsTollFreeDate(DateTime date)
         {
             return date.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday ||
-                   Holidays.GetHolidays().Any(h => h.IsVehiclePassedOnTheseDays(date));
+                   _holidayRepository.GetAll().Any(h => h.IsVehiclePassedOnTheseDays(date));
         }
     }
 }
