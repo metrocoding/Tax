@@ -8,4 +8,9 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="obj\" />
+      <Folder Include="obj\Release\net7.0\" />
+    </ItemGroup>
+
 </Project>
